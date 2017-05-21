@@ -36,3 +36,17 @@ ___
 
 ### Login table
  - ```tbl_users```
+
+____
+
+### Dependencies that might affect the project:
+- Having a cross-functional team.
+
+____
+
+### Product Release Dates:
+- Every 2-weeks.
+
+
+### Product Launch Tactics:
+- 

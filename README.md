@@ -16,9 +16,10 @@ ____
     - download from [https://nodejs.org](https://nodejs.org)
  + NPM
     - comes with NodeJS
+
 ___
 
-### Running Procedure
+### Running The Project
 + Clone project from ```this``` repo using:
     - ``` git clone https://github.com/emmanuelstroem/paydash.git```
 
@@ -30,6 +31,8 @@ ___
 
 + Run the project using:
     - ``` npm start```
+
+___
 
 ### Login table
  - ```tbl_users```

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include partials/head %>
+
+    <script>
+
+        if (allusers){
+
+            console.log("hahahaha")
+        }
+        var alldebtors = {allusers};
+
+        var table = $('#debtorsTable').DataTable({
+            processing: true
+
+
+        })
+
+        console.log("<%-  allusers %>")
+
+    </script>
+</head>
+
+<body>
+    <p>Welcome to
+        <%= title %>
+    </p>
+    <button class="btn-danger">hahahaha <%= allusers.length %> </button>
+
+    <div class="container">
+
+        <table id="debtorsTable"></table>
+
+    </div>
+    <!-- /container -->
+
+</body>
+
+</html>

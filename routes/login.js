@@ -13,7 +13,7 @@ var PS = require('pg-promise').PreparedStatement;
 
 
 // Authenticate User
-router.post('/', function (req, res, next) {
+router.post('/', function(req, res, next) {
 
 
     var username = req.body.inputUsername;
@@ -24,41 +24,57 @@ router.post('/', function (req, res, next) {
 
     var findUser = new PQ('SELECT username, user_password FROM tbl_users WHERE username = $1 AND user_password = $2', [username, pass]);
 
+    var findAllUsers = new PQ('SELECT * FROM tbl_users');
+
 
     db.one(findUser)
         .then(user => {
-            if(!user){
+            if (!user) {
 
-            console.log('auth failed')
-            res.redirect('/')
-        }
-        else if(user){
-            console.log('login success: ' + user);
-            req.session.user = username;
+                console.log('auth failed')
+                req.session.error = 'Authentication failed, please check your ' +
+                    ' username and password.' +
+                    ' (use "tj" and "foobar")';
+                // res.redirect('/')
+            } else if (user) {
+                console.log('login success: ' + user.username);
+                req.session.user = username;
+
+                req.session.success = 'Authenticated as ' + req.session.user;
 
 
-        req.session.save(function (err) {
 
-            if(!err){
-                console.log('session saved');
-                console.log(req.session.user)
+                req.session.save(function(err) {
 
-                res.redirect('/dashboard')
-            } else {
+                    if (!err) {
+                        console.log('session saved');
+                        console.log(req.session.user);
 
-                console.log('session not saved')
+                        res.redirect('/alldebtors')
+
+
+
+                    } else {
+
+                        console.log('session not saved')
+                    }
+
+                });
             }
+        })
+        .catch(error => {
+            console.log(error)
+            if (error) {
+                // res.json(error)
 
+                res.redirect('back');
+
+                req.session.error = 'Authentication failed, please check your ' +
+                    ' username and password.' +
+                    ' (use "tj" and "foobar")';
+
+            }
         });
-        }
-    })
-    .catch (error => {
-        console.log(error)
-    if(error){
-            res.json(error)
-
-    }
-    });
 
 });
 

@@ -6,36 +6,64 @@
 
     <script>
 
-        if (allusers){
+        /*if (allusers){
 
             console.log("hahahaha")
         }
+
         var alldebtors = {allusers};
+*/
+    var data = [];
+<% for(var i=0; i<allusers.length; i++) {%>
 
-        var table = $('#debtorsTable').DataTable({
-            processing: true
-
-
-        })
-
-        console.log("<%-  allusers %>")
-
+      var arr = [];
+   arr.push("<%= allusers[i].id %>");
+   arr.push("<%= allusers[i].cust_name %>");
+   arr.push("<%= allusers[i].national_id %>");
+   arr.push("<%= allusers[i].mobile_number %>");
+   arr.push("<%= allusers[i].loan_balance %>");
+   data.push(arr);
+<% } %>
+       
     </script>
 </head>
 
 <body>
-    <p>Welcome to
-        <%= title %>
-    </p>
-    <button class="btn-danger">hahahaha <%= allusers.length %> </button>
-
+    <h3 class="">Welcome to
+        <%= title %> Debtors
+    </h3>
+    <hr>
+    
     <div class="container">
 
-        <table id="debtorsTable"></table>
-
+<table id="debtorsTable" class="display">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>National ID</th>
+            <th>Mobile Number</th>
+            <th>Loan Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+    </tbody>
+</table>
     </div>
     <!-- /container -->
 
 </body>
 
+<script type="text/javascript">
+   $(document).ready(function() {
+    $('#debtorsTable').DataTable( {
+        dom: 'Bfrtip',
+        data: data,
+        buttons: [
+            'excel'
+        ]
+    } );
+} );
+</script>
 </html>

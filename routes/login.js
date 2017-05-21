@@ -32,9 +32,7 @@ router.post('/', function(req, res, next) {
             if (!user) {
 
                 console.log('auth failed')
-                req.session.error = 'Authentication failed, please check your ' +
-                    ' username and password.' +
-                    ' (use "tj" and "foobar")';
+                req.session.error = 'Authentication failed, please check your Username and Password';
                 // res.redirect('/')
             } else if (user) {
                 console.log('login success: ' + user.username);
@@ -66,12 +64,9 @@ router.post('/', function(req, res, next) {
             console.log(error)
             if (error) {
                 // res.json(error)
-
                 res.redirect('back');
 
-                req.session.error = 'Authentication failed, please check your ' +
-                    ' username and password.' +
-                    ' (use "tj" and "foobar")';
+                req.session.error = 'Authentication failed, please check your Username and Password';
 
             }
         });
